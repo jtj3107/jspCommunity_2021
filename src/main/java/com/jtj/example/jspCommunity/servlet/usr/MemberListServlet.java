@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jtj.example.jspCommunity.container.Container;
+import com.jtj.example.jspCommunity.dto.Member;
 import com.sbs.mysqliutil.MysqlUtil;
 import com.sbs.mysqliutil.SecSql;
 
@@ -23,10 +25,11 @@ public class MemberListServlet extends HttpServlet {
 
 		MysqlUtil.setDBInfo("127.0.0.1", "geotjeoli", "gjl123414", "jspCommunity");
 
-		List<Map<String, Object>> memberMapList = MysqlUtil.selectRows(new SecSql().append("SELECT * FROM member ORDER BY id DESC"));
+		// List<Map<String, Object>> memberMapList = MysqlUtil.selectRows(new SecSql().append("SELECT * FROM member ORDER BY id DESC"));
+		List<Member> members = Container.memberService.getForPrintMembers();
 		MysqlUtil.closeConnection();
 		
-		req.setAttribute("memberMapList", memberMapList);
+		req.setAttribute("members", members);
 		
 		req.getRequestDispatcher("/jsp/usr/member/list.jsp").forward(req, resp);
 	}
