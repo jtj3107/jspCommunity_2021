@@ -1,8 +1,9 @@
-package com.sbs.example.mysqlutil;
+package com.sbs.mysqliutil;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
+// DB연결중 오류가 생기면 종료시키는 클래스
 public class MysqlUtilException extends RuntimeException {
 	private Exception originException;
 

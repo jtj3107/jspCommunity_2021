@@ -19,19 +19,19 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 	%>
 	<div>
 		번호 :
-		<%=article.id%>
+		<%=article.getId()%>
 		<br />
 		작성날짜 :
-		<%=article.regDate%>
+		<%=article.getRegDate()%>
 		<br />
 		갱신날짜 :
-		<%=article.updateDate%>
+		<%=article.getUpdateDate()%>
 		<br />
 		작성자 :
-		<%=article.extra__writer%>
+		<%=article.getExtra__writer()%>
 		<br />
 		제목 :
-		<%=article.title%>
+		<%=article.getTitle()%>
 		<hr />
 	</div>
 	<%

@@ -1,4 +1,4 @@
-package com.sbs.example.mysqlutil;
+package com.sbs.mysqliutil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +25,7 @@ public class SecSql {
 		return getFormat().startsWith("INSERT");
 	}
 
+	// 
 	public SecSql append(Object... args) {
 		if (args.length > 0) {
 			String sqlBit = (String) args[0];

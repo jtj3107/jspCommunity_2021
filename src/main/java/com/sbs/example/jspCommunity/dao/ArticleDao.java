@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.jtj.example.jspCommunity.dto.Article;
-import com.sbs.example.mysqlutil.MysqlUtil;
-import com.sbs.example.mysqlutil.SecSql;
+import com.sbs.mysqliutil.MysqlUtil;
+import com.sbs.mysqliutil.SecSql;
 
 public class ArticleDao {
 	public List<Article> getForPrintArticlesByBoardId(int boardId) {
-		List<Article> articles = new ArrayList<>();
-
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", M.name AS extra__writer");
@@ -27,12 +25,6 @@ public class ArticleDao {
 		}
 		sql.append("ORDER BY A.id DESC");
 
-		List<Map<String, Object>> articleMapList = MysqlUtil.selectRows(sql);
-
-		for (Map<String, Object> articleMap : articleMapList) {
-			articles.add(new Article(articleMap));
-		}
-
-		return articles;
+		return MysqlUtil.selectRows(sql, Article.class);
 	}
 }

@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Article;
 import com.jtj.example.jspCommunity.service.ArticleService;
-import com.sbs.example.mysqlutil.MysqlUtil;
+import com.sbs.mysqliutil.MysqlUtil;
+
 
 @WebServlet("/usr/article/list")
 public class ArticleListServlet extends HttpServlet {
