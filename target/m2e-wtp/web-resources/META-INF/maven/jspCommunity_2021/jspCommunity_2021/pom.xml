@@ -10,8 +10,13 @@
 	<properties>
 		<jackson.version>2.12.4</jackson.version>
 	</properties>
-	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -25,7 +30,7 @@
 			<version>1.18.16</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
