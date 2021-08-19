@@ -36,7 +36,7 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 		<%=article.getExtra__writer()%>
 		<br />
 		제목 :
-		<%=article.getTitle()%>
+		<a href="detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 		<hr />
 	</div>
 	<%

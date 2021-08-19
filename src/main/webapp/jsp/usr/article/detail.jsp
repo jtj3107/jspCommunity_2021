@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="com.jtj.example.jspCommunity.dto.Article"%>
 <%
@@ -31,7 +30,10 @@ Article article = (Article) request.getAttribute("article");
 		<br />
 		내용 :
 		<%=article.getBody()%>
-		<hr />
+	</div>
+	<hr />
+	<div>
+		<a href="list?boardId=<%=article.getBoardId()%>">리스트로 이동</a>
 	</div>
 </body>
-</html> 
+</html>

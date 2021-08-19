@@ -54,4 +54,17 @@ public class ArticleDao {
 		
 		return MysqlUtil.selectRow(sql, Board.class);
 	}
+
+	public int write(Map<String, Object> args) {
+		SecSql sql = new SecSql();
+		sql.append("INSERT INTO article");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", boardId = ?", args.get("boardId"));
+		sql.append(", memberId = ?", args.get("memberId"));
+		sql.append(", title = ?", args.get("title"));
+		sql.append(", body = ?", args.get("body"));
+		
+		return MysqlUtil.insert(sql);
+	}
 }

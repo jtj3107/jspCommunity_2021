@@ -1,6 +1,7 @@
 package com.jtj.example.jspCommunity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jtj.example.jspCommunity.dto.Article;
 import com.jtj.example.jspCommunity.dto.Board;
@@ -25,5 +26,9 @@ public class ArticleService {
 
 	public Board getBoardById(int boardId) {
 		return articleDao.getBoardById(boardId);
+	}
+
+	public int write(Map<String, Object> args) {
+		return articleDao.write(args);
 	}
 }
