@@ -23,31 +23,33 @@ public class DispatcherServlet extends HttpServlet {
 
 		String requestUri = req.getRequestURI();
 		String[] requestUriBits = requestUri.split("/");
-		
-		if( requestUriBits.length < 5) {
+
+		if (requestUriBits.length < 5) {
 			resp.getWriter().append("올바른 요청이 아닙니다.");
 			return;
 		}
-		
+
 		MysqlUtil.setDBInfo("127.0.0.1", "geotjeoli", "gjl123414", "jspCommunity");
-		
+
 		String jspPath = null;
-		
+
 		String controllerName = requestUriBits[3];
 		String actionMethodName = requestUriBits[4];
-		
+
 		if (controllerName.equals("member")) {
 			MemberController memberController = Container.memberController;
-		
-			if(actionMethodName.equals("list")) {
+
+			if (actionMethodName.equals("list")) {
 				jspPath = memberController.showList(req, resp);
 			}
-		}	
-		else if (controllerName.equals("article")) {
+		} else if (controllerName.equals("article")) {
 			ArticleController articleController = Container.articleController;
-		
-			if(actionMethodName.equals("list")) {
+
+			if (actionMethodName.equals("list")) {
 				jspPath = articleController.showList(req, resp);
+			}
+			else if(actionMethodName.equals("detail")) {
+				jspPath = articleController.showDetail(req, resp);
 			}
 		}
 
