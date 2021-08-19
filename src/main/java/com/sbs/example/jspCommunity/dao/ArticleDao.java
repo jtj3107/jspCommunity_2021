@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jtj.example.jspCommunity.dto.Article;
+import com.jtj.example.jspCommunity.dto.Board;
 import com.sbs.mysqliutil.MysqlUtil;
 import com.sbs.mysqliutil.SecSql;
 
@@ -43,5 +44,14 @@ public class ArticleDao {
 		
 		return MysqlUtil.selectRow(sql, Article.class);
 		
+	}
+
+	public Board getBoardById(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT B.*");
+		sql.append("FROM board AS B");
+		sql.append("WHERE B.id = ?", id);
+		
+		return MysqlUtil.selectRow(sql, Board.class);
 	}
 }

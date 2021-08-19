@@ -1,0 +1,16 @@
+package com.jtj.example.jspCommunity.dto;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
+public class Board {
+	private int id;
+	private String regDate;
+	private String updateDate;
+	private String code;
+	private String name;
+
+}

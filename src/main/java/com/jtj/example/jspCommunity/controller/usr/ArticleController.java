@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Article;
+import com.jtj.example.jspCommunity.dto.Board;
 import com.jtj.example.jspCommunity.service.ArticleService;
 
 public class ArticleController {
@@ -18,6 +19,16 @@ public class ArticleController {
 
 	public String showList(HttpServletRequest req, HttpServletResponse resp) {
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
+		
+		Board board = articleService.getBoardById(boardId);
+		
+		if(board == null) {
+			req.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다.");
+			req.setAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		req.setAttribute("board", board);
 		
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
 		

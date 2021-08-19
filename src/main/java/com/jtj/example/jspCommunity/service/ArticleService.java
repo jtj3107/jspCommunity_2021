@@ -3,6 +3,7 @@ package com.jtj.example.jspCommunity.service;
 import java.util.List;
 
 import com.jtj.example.jspCommunity.dto.Article;
+import com.jtj.example.jspCommunity.dto.Board;
 import com.jtj.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 
@@ -20,5 +21,9 @@ public class ArticleService {
 
 	public Article getForPrintArticleById(int id) {
 		return articleDao.getForPrintArticleById(id);
+	}
+
+	public Board getBoardById(int boardId) {
+		return articleDao.getBoardById(boardId);
 	}
 }
