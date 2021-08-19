@@ -10,7 +10,7 @@ String pageTitle = board.getName() + "게시물 작성페이지";
 <h1><%=pageTitle%></h1>
 <div>
 	<form action="doWrite" method="POST">
-		<input type="hidden" name="boardId" value="<%=board.getId()%>" />
+		<input type="hidden" name="boardId" value="${board.id}" />
 		<input type="hidden" name="memberId" value="1" />
 
 		<hr />

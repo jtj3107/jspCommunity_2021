@@ -7,7 +7,7 @@
 Board board = (Board) request.getAttribute("board");
 List<Article> articles = (List<Article>) request.getAttribute("articles");
 
-String pageTitle = board.getName() + "게시물 리스트"; 
+String pageTitle = board.getName() + "게시물 리스트";
 %>
 <%@ include file="../../part/head.jspf"%>
 
@@ -17,8 +17,8 @@ String pageTitle = board.getName() + "게시물 리스트";
 	<a href="write?boardId=<%=request.getParameter("boardId")%>">게시물 작성</a>
 </div>
 <%
-	for (Article article : articles) {
-	%>
+for (Article article : articles) {
+%>
 <div>
 	번호 :
 	<%=article.getId()%>
@@ -37,6 +37,6 @@ String pageTitle = board.getName() + "게시물 리스트";
 	<hr />
 </div>
 <%
-	}
-	%>
-<%@ include file="../../part/foot.jspf" %>
+}
+%>
+<%@ include file="../../part/foot.jspf"%>
