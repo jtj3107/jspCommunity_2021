@@ -1,10 +1,11 @@
 package com.jtj.example.jspCommunity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jtj.example.jspCommunity.container.Container;
-import com.jtj.example.jspCommunity.dao.MemberDao;
 import com.jtj.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.dao.MemberDao;
 
 public class MemberService {
 	private MemberDao memberDao;
@@ -15,6 +16,10 @@ public class MemberService {
 
 	public List<Member> getForPrintMembers() {
 		return memberDao.getForPrintMembers();
+	}
+
+	public void join(Map<String, Object> args) {
+		memberDao.join(args);
 	}
 
 }
