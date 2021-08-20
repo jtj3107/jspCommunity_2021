@@ -1,7 +1,6 @@
 package com.jtj.example.jspCommunity.servlet;
 
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,9 +24,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 		} else if (controllerName.equals("member")) {
 			UsrMemberController memberController = Container.memberController;
 
-			if (actionMethodName.equals("list")) {
-				jspPath = memberController.showList(req, resp);
-			} else if (actionMethodName.equals("join")) {
+			if (actionMethodName.equals("join")) {
 				jspPath = memberController.showJoin(req, resp);
 			} else if (actionMethodName.equals("doJoin")) {
 				jspPath = memberController.doJoin(req, resp);
