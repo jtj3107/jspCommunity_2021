@@ -36,7 +36,7 @@ public class UsrMemberController {
 		String name = req.getParameter("name");
 		String nickname = req.getParameter("nickname");
 		String email = req.getParameter("email");
-		String cellphoneNo = req.getParameter("cellphoneNo");
+		String cellPhoneNo = req.getParameter("cellPhoneNo");
 		
 		Map<String, Object> joinArgs = new HashMap<>();
 		joinArgs.put("loginId", loginId);
@@ -44,7 +44,7 @@ public class UsrMemberController {
 		joinArgs.put("name", name);
 		joinArgs.put("nickname", nickname);
 		joinArgs.put("email", email);
-		joinArgs.put("cellphoneNo", cellphoneNo);
+		joinArgs.put("cellPhoneNo", cellPhoneNo);
 		
 		memberService.join(joinArgs);
 		

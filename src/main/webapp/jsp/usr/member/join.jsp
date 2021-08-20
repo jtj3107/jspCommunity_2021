@@ -6,9 +6,93 @@
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
 <div>
-	<form action="doJoin" method="POST">
+	<script>
+		let DoJoinForm__submited = false;
+		function DoJoinForm__submit(form) {
+			if (DoJoinForm__submited) {
+				alert('처리중입니다.');
+				return;
+			}
+
+			form.loginId.value = form.loginId.value.trim();
+
+			if (form.loginId.value.length == 0) {
+				alert('로그인 아이디를 입력해주세요.');
+				form.loginId.focus();
+
+				return;
+			}
+
+			form.loginPw.value = form.loginPw.value.trim();
+
+			if (form.loginPw.value.length == 0) {
+				alert('로그인 비밀번호를 입력해주세요.');
+				form.loginPw.focus();
+
+				return;
+			}
+			
+			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
+
+			if (form.loginPwConfirm.value.length == 0) {
+				alert('로그인 비밀번호 확인을 입력해주세요.');
+				form.loginPwConfirm.focus();
+
+				return;
+			}
+			
+			if (form.loginPw.value != form.loginPwConfirm.value) {
+				alert('로그인 비밀번호가 일치하지 않습니다.');
+				form.loginPwConfirm.focus();
+
+				return;
+			}
+			
+			form.name.value = form.name.value.trim();
+
+			if (form.name.value.length == 0) {
+				alert('이름을 입력해주세요.');
+				form.name.focus();
+
+				return;
+			}
+			
+			form.nickname.value = form.nickname.value.trim();
+
+			if (form.nickname.value.length == 0) {
+				alert('별명을 입력해주세요.');
+				form.nickname.focus();
+
+				return;
+			}
+			
+			form.email.value = form.email.value.trim();
+
+			if (form.email.value.length == 0) {
+				alert('이메일을 입력해주세요.');
+				form.email.focus();
+
+				return;
+			}
+			
+			form.cellPhoneNo.value = form.cellPhoneNo.value.trim();
+
+			if (form.cellPhoneNo.value.length == 0) {
+				alert('전화번호를 입력해주세요.');
+				form.cellPhoneNo.focus();
+
+				return;
+			}
+			
+			form.submit();
+			DoJoinForm__submited = true;
+		}
+	</script>
+
+	<form action="doJoin" method="POST" onsubmit="DoJoinForm__submit(this); return false;">
 		<hr />
 		<div>
+		
 			<div>로그인 아이디</div>
 			<div>
 				<input type="text" name="loginId" maxlength="50" placeholder="로그인 아이디를 입력해주세요." />
@@ -19,6 +103,13 @@
 			<div>로그인 비밀번호</div>
 			<div>
 				<input type="password" name="loginPw" maxlength="50" placeholder="로그인 비밀번호를 입력해주세요." />
+			</div>
+		</div>
+		<hr />
+		<div>
+			<div>로그인 비밀번호 확인</div>
+			<div>
+				<input type="password" name="loginPwConfirm" maxlength="50" placeholder="로그인 비밀번호 확인을 입력해주세요." />
 			</div>
 		</div>
 		<hr />
@@ -46,7 +137,7 @@
 		<div>
 			<div>전화번호</div>
 			<div>
-				<input type="number" name="cellphoneNo" maxlength="50" placeholder="전화번호를 입력해주세요." />
+				<input type="number" name="cellPhoneNo" maxlength="50" placeholder="전화번호를 입력해주세요." />
 			</div>
 		</div>
 		<hr />

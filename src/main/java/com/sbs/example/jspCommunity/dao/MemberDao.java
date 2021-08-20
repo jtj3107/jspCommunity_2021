@@ -25,6 +25,7 @@ public class MemberDao {
 		sql.append(", `name` = ?", args.get("name"));
 		sql.append(", nickname = ?", args.get("nickname"));
 		sql.append(", email = ?", args.get("email"));
+		sql.append(", cellPhoneNo = ?", args.get("cellPhoneNo"));
 		sql.append(", loginId = ?", args.get("loginId"));
 		sql.append(", loginPw = ?", args.get("loginPw"));
 
