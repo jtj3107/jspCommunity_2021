@@ -1,9 +1,5 @@
 package com.jtj.example.jspCommunity.servlet;
 
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,29 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.controller.UsrArticleController;
 import com.jtj.example.jspCommunity.controller.UsrMemberController;
-import com.sbs.mysqliutil.MysqlUtil;
 
 @WebServlet("/usr/*")
-public class UsrDispatcherServlet extends HttpServlet {
+public class UsrDispatcherServlet extends DispatcherServlet  {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		resp.setContentType("text/html; charset=UTF-8");
-
-		String requestUri = req.getRequestURI();
-		String[] requestUriBits = requestUri.split("/");
-
-		if (requestUriBits.length < 5) {
-			resp.getWriter().append("올바른 요청이 아닙니다.");
-			return;
-		}
-
-		MysqlUtil.setDBInfo("127.0.0.1", "geotjeoli", "gjl123414", "jspCommunity");
-
+	protected String doAction(HttpServletRequest req, HttpServletResponse resp, String controllerName, String actionMethodName) {	
 		String jspPath = null;
-
-		String controllerName = requestUriBits[3];
-		String actionMethodName = requestUriBits[4];
 
 		if (controllerName.equals("member")) {
 			UsrMemberController memberController = Container.memberController;
@@ -73,15 +52,6 @@ public class UsrDispatcherServlet extends HttpServlet {
 				jspPath = articleController.doModify(req, resp);
 			}
 		}
-
-		MysqlUtil.closeConnection();
-
-		RequestDispatcher rd = req.getRequestDispatcher("/jsp/" + jspPath + ".jsp");
-		rd.forward(req, resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+		return jspPath;
 	}
 }
