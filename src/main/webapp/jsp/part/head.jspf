@@ -8,6 +8,12 @@
 <body>
 
 	<div>
+		<c:if test="${sessionScope.loginedMemberId > 0}">
+			<div>
+				로그인된 회원의 번호 : ${sessionScope.loginedMemberId}
+			</div>
+		</c:if>
+		
 		<a href="../article/list?boardId=1">공지사항 리스트</a>
 	
 		<c:if test="${sessionScope.loginedMemberId > 0}">
