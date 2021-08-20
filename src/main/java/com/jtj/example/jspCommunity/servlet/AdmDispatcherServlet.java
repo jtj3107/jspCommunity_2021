@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtj.example.jspCommunity.container.Container;
-import com.jtj.example.jspCommunity.controller.adm.MemberController;
+import com.jtj.example.jspCommunity.controller.AdmMemberController;
 import com.sbs.mysqliutil.MysqlUtil;
 
 @WebServlet("/adm/*")
@@ -36,7 +36,7 @@ public class AdmDispatcherServlet extends HttpServlet {
 		String actionMethodName = requestUriBits[4];
 
 		if (controllerName.equals("member")) {
-			MemberController memberController = Container.admMemberController;
+			AdmMemberController memberController = Container.admMemberController;
 
 			if (actionMethodName.equals("list")) {
 				jspPath = memberController.showList(req, resp);

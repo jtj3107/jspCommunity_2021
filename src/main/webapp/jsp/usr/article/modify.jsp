@@ -6,7 +6,7 @@
 <h1>${pageTitle}</h1>
 <div>
 	<form action="doModify" method="POST">
-		<input type="hidden" name="id" value="${atricle.id}" />
+		<input type="hidden" name="id" value="${article.id}" />
 		<input type="hidden" name="memberId" value="1" />
 
 		<hr />

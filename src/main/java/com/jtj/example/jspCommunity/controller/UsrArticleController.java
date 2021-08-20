@@ -1,4 +1,4 @@
-package com.jtj.example.jspCommunity.controller.usr;
+package com.jtj.example.jspCommunity.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +12,10 @@ import com.jtj.example.jspCommunity.dto.Article;
 import com.jtj.example.jspCommunity.dto.Board;
 import com.jtj.example.jspCommunity.service.ArticleService;
 
-public class ArticleController {
+public class UsrArticleController {
 	private ArticleService articleService;
 	
-	public ArticleController() {
+	public UsrArticleController() {
 		articleService = Container.articleService;
 	}
 

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtj.example.jspCommunity.container.Container;
-import com.jtj.example.jspCommunity.controller.usr.ArticleController;
-import com.jtj.example.jspCommunity.controller.usr.MemberController;
+import com.jtj.example.jspCommunity.controller.UsrArticleController;
+import com.jtj.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.mysqliutil.MysqlUtil;
 
 @WebServlet("/usr/*")
@@ -37,13 +37,13 @@ public class UsrDispatcherServlet extends HttpServlet {
 		String actionMethodName = requestUriBits[4];
 
 		if (controllerName.equals("member")) {
-			MemberController memberController = Container.memberController;
+			UsrMemberController memberController = Container.memberController;
 
 			if (actionMethodName.equals("list")) {
 				jspPath = memberController.showList(req, resp);
 			}
 		} else if (controllerName.equals("article")) {
-			ArticleController articleController = Container.articleController;
+			UsrArticleController articleController = Container.articleController;
 
 			if (actionMethodName.equals("list")) {
 				jspPath = articleController.showList(req, resp);

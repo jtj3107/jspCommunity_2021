@@ -1,4 +1,4 @@
-package com.jtj.example.jspCommunity.controller.adm;
+package com.jtj.example.jspCommunity.controller;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Member;
 import com.jtj.example.jspCommunity.service.MemberService;
 
-public class MemberController {
+public class AdmMemberController {
 	private MemberService memberService;
 
-	public MemberController() {
+	public AdmMemberController() {
 		memberService = Container.memberService;
 	}
 

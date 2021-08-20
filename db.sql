@@ -71,7 +71,7 @@ CREATE TABLE article (
     boardId INT(10) UNSIGNED NOT NULL,
     title CHAR(100) NOT NULL,
     `body` LONGTEXT NOT NULL,
-    hitsCount INT(10) UNSIGNED NOT NULL
+    hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
 # 테스트 게시물 생성
@@ -117,3 +117,4 @@ title = '제목5',
 
 # adminLevel 칼럼을 authLevel로 변경
 ALTER TABLE `member` CHANGE `adminLevel` `authLevel` TINYINT(1) UNSIGNED DEFAULT 2 NOT NULL COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된,4=관리자'; 
+
