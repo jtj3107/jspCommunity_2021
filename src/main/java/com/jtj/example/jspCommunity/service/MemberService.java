@@ -22,4 +22,8 @@ public class MemberService {
 		memberDao.join(args);
 	}
 
+	public Member getForPrintMemberByLoginId(String loginId) {
+		return memberDao.getForPrintMemberByLoginId(loginId);
+	}
+
 }

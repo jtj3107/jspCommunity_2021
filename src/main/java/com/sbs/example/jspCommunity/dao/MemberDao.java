@@ -32,4 +32,13 @@ public class MemberDao {
 		MysqlUtil.insert(sql);
 	}
 
+	public Member getForPrintMemberByLoginId(String loginId) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT M.*");
+		sql.append("FROM `member` AS M");
+		sql.append("WHERE M.loginId = ?", loginId);
+
+		return MysqlUtil.selectRow(sql, Member.class);
+	}
+
 }

@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS jspCommunity;
+`member`DROP DATABASE IF EXISTS jspCommunity;
 CREATE DATABASE jspCommunity;
 USE jspCommunity;
 
@@ -9,6 +9,7 @@ CREATE TABLE `member` (
     `name` CHAR(50) NOT NULL,
     nickname CHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    cellPhoneNo VARCHAR(100) NOT NULL,
     loginId CHAR(50) NOT NULL UNIQUE,
     loginPw VARCHAR(200) NOT NULL,
     adminLevel TINYINT(1) UNSIGNED NOT NULL DEFAULT 2 COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된,4=관리자'
@@ -21,6 +22,7 @@ updateDate = NOW(),
 `name` = '김민수',
 nickname = '강바람',
 email = 'jtj3926@gmail.com',
+cellPhoneNo = '01028033107',
 loginId = 'user1',
 loginPw = 'user1';
 
@@ -31,6 +33,7 @@ updateDate = NOW(),
 `name` = '김미소',
 nickname = '이또한지나가리라',
 email = 'jtj3926@gmail.com',
+cellPhoneNo = '01028033107',
 loginId = 'user2',
 loginPw = 'user2';
 
@@ -118,3 +121,5 @@ title = '제목5',
 # adminLevel 칼럼을 authLevel로 변경
 ALTER TABLE `member` CHANGE `adminLevel` `authLevel` TINYINT(1) UNSIGNED DEFAULT 2 NOT NULL COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된,4=관리자'; 
 
+ALTER TABLE `member` CHANGE `loginId` `loginId` CHAR(50) NOT NULL AFTER `updateDate`, 
+                     CHANGE `loginPw` `loginPw` VARCHAR(200)  NOT NULL AFTER `loginId`; 
