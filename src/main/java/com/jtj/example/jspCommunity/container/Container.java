@@ -2,6 +2,7 @@ package com.jtj.example.jspCommunity.container;
 
 import com.jtj.example.jspCommunity.controller.AdmMemberController;
 import com.jtj.example.jspCommunity.controller.UsrArticleController;
+import com.jtj.example.jspCommunity.controller.UsrHomeController;
 import com.jtj.example.jspCommunity.controller.UsrMemberController;
 
 import com.jtj.example.jspCommunity.service.ArticleService;
@@ -18,6 +19,7 @@ public class Container {
 	public static MemberService memberService;
 	public static UsrMemberController memberController;
 	public static AdmMemberController admMemberController;
+	public static UsrHomeController homeController;
 
 	static {
 		memberDao = new MemberDao();
@@ -29,5 +31,6 @@ public class Container {
 		memberController = new UsrMemberController();
 		admMemberController = new AdmMemberController();
 		articleController = new UsrArticleController();
+		homeController = new UsrHomeController();
 	}
 }
