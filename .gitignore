@@ -4,5 +4,6 @@
 target/
 build/
 bin/
+src/main/webapp/META-INF/config.json
 
 

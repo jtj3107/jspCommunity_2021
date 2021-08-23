@@ -6,6 +6,7 @@ import com.jtj.example.jspCommunity.controller.UsrHomeController;
 import com.jtj.example.jspCommunity.controller.UsrMemberController;
 
 import com.jtj.example.jspCommunity.service.ArticleService;
+import com.jtj.example.jspCommunity.service.EmailService;
 import com.jtj.example.jspCommunity.service.MemberService;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dao.MemberDao;
@@ -17,6 +18,8 @@ public class Container {
 
 	public static MemberDao memberDao;
 	public static MemberService memberService;
+	public static EmailService emailService;
+	
 	public static UsrMemberController memberController;
 	public static AdmMemberController admMemberController;
 	public static UsrHomeController homeController;
@@ -25,6 +28,7 @@ public class Container {
 		memberDao = new MemberDao();
 		articleDao = new ArticleDao();
 
+		emailService = new EmailService();
 		memberService = new MemberService();
 		articleService = new ArticleService();
 
