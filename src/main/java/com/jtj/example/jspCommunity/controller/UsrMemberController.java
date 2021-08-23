@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Member;
 import com.jtj.example.jspCommunity.service.MemberService;
+import com.sbs.example.util.Util;
 
 public class UsrMemberController {
 	private MemberService memberService;
@@ -136,16 +137,25 @@ public class UsrMemberController {
 		
 		Member member = memberService.getForPrintMemberByLoginId(loginId);
 		
-		String data = "";
+		Map<String, Object> rs = new HashMap<>();
+		
+		String resultCode = null;
+		String msg = null;
 		
 		if(member != null) {
-			data = "NO";
+			resultCode = "F-1";
+			msg = "이미 사용중인 로그인아이디 입니다.";
 		}
 		else {
-			data = "YES";
+			resultCode = "S-1";
+			msg = "사용가능한 로그인아이디 입니다.";
 		}
 		
-		req.setAttribute("data", data);
+		rs.put("resultCode", resultCode);
+		rs.put("msg", msg);
+		rs.put("loginId", loginId);
+		
+		req.setAttribute("data", Util.getJsonText(rs));
 		return "common/pure";
 	}
 

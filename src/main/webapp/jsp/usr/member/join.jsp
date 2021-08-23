@@ -21,15 +21,15 @@
 					loginId
 				},
 				function(data) {
-					if( data == "YES") {
-						alert("해당 로그인 아이디는 사용 가능합니다.");
-						DoJoinForm__checkedLoginId = loginId;
-					}	
-					else {
-						alert("해당 로그인 아이디는 이미 사용중 입니다.");
+					if(data.msg) {
+						alert(data.msg);
 					}
+					
+					if(data.resultCode.substr(0, 2) ==  "S-") {
+						DoJoinForm__checkedLoginId = data.loginId;
+					}	
 				},
-				"html"
+				"json"
 			);
 		}
 		
@@ -125,7 +125,7 @@
 	<form action="doJoin" method="POST" onsubmit="DoJoinForm__submit(this); return false;">
 		<hr />
 		<div>
-		
+
 			<div>로그인 아이디</div>
 			<div>
 				<input type="text" name="loginId" maxlength="50" placeholder="로그인 아이디를 입력해주세요." />
