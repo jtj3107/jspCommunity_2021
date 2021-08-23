@@ -26,4 +26,8 @@ public class MemberService {
 		return memberDao.getForPrintMemberByLoginId(loginId);
 	}
 
+	public Member getMemberById(int id) {
+		return memberDao.getMemberById(id);
+	}
+
 }

@@ -18,14 +18,12 @@ public class AdmMemberController {
 	}
 
 	public String showList(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-		
-		if(session.getAttribute("loginedMemberId") == null) {
+		if ((boolean) req.getAttribute("isLogined")) {
 			req.setAttribute("alertMsg", "로그인후 사용해주세요.");
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-		
+
 		List<Member> members = memberService.getForPrintMembers();
 
 		req.setAttribute("members", members);

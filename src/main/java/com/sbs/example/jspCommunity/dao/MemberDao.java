@@ -41,4 +41,13 @@ public class MemberDao {
 		return MysqlUtil.selectRow(sql, Member.class);
 	}
 
+	public Member getMemberById(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT M.*");
+		sql.append("FROM `member` AS M");
+		sql.append("WHERE M.id = ?", id);
+
+		return MysqlUtil.selectRow(sql, Member.class);
+	}
+
 }
