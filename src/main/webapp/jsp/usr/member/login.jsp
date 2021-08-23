@@ -4,6 +4,9 @@
 <c:set var="pageTitle" value="로그인" />
 
 <%@ include file="../../part/head.jspf"%>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 <h1>${pageTitle}</h1>
 <div>
 	<script>
@@ -32,12 +35,16 @@
 				return;
 			}
 			
+			form.loginPwReal.value = sha256(form.loginPw.value);
+			form.loginPw.value = "";
+			
 			form.submit();
 			DoLoginForm__submited = true;
 		}
 	</script>
 
 	<form action="doLogin" method="POST" onsubmit="DoLoginForm__submit(this); return false;">
+		<input type="hidden" name="loginPwReal" />
 		<hr />
 		<div>
 		

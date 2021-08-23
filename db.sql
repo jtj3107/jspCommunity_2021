@@ -1,4 +1,4 @@
-`member`DROP DATABASE IF EXISTS jspCommunity;
+DROP DATABASE IF EXISTS jspCommunity;
 CREATE DATABASE jspCommunity;
 USE jspCommunity;
 
@@ -122,4 +122,13 @@ title = '제목5',
 ALTER TABLE `member` CHANGE `adminLevel` `authLevel` TINYINT(1) UNSIGNED DEFAULT 2 NOT NULL COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된,4=관리자'; 
 
 ALTER TABLE `member` CHANGE `loginId` `loginId` CHAR(50) NOT NULL AFTER `updateDate`, 
-                     CHANGE `loginPw` `loginPw` VARCHAR(200)  NOT NULL AFTER `loginId`; 
+                     CHANGE `loginPw` `loginPw` VARCHAR(200)  NOT NULL AFTER `loginId`;
+                     
+SELECT id, loginPw, SHA2(loginPw, 256)
+FROM `member` 
+WHERE id < 10;
+
+UPDATE `member`
+SET loginPw = SHA2(loginPw, 256)
+WHERE id < 10;
+

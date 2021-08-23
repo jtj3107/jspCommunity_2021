@@ -25,7 +25,7 @@ public class UsrMemberController {
 
 	public String doJoin(HttpServletRequest req, HttpServletResponse resp) {		
 		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
+		String loginPw = req.getParameter("loginPwReal");
 		String name = req.getParameter("name");
 		String nickname = req.getParameter("nickname");
 		String email = req.getParameter("email");
@@ -60,7 +60,7 @@ public class UsrMemberController {
 	
 	public String doLogin(HttpServletRequest req, HttpServletResponse resp) {	
 		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
+		String loginPw = req.getParameter("loginPwReal");
 		
 		Member member = memberService.getForPrintMemberByLoginId(loginId);
 		

@@ -4,6 +4,9 @@
 <c:set var="pageTitle" value="회원가입" />
 
 <%@ include file="../../part/head.jspf"%>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 <h1>${pageTitle}</h1>
 <div>
 	<script>
@@ -117,12 +120,17 @@
 				return;
 			}
 			
+			form.loginPwReal.value = sha256(form.loginPw.value);
+			form.loginPw.value = "";
+			form.loginPwConfirm.value = "";
+			
 			form.submit();
 			DoJoinForm__submited = true;
 		}
 	</script>
 
 	<form action="doJoin" method="POST" onsubmit="DoJoinForm__submit(this); return false;">
+		<input type="hidden" name="loginPwReal" />
 		<hr />
 		<div>
 
@@ -171,7 +179,7 @@
 		<div>
 			<div>전화번호</div>
 			<div>
-				<input type="number" name="cellPhoneNo" maxlength="50" placeholder="전화번호를 입력해주세요." />
+				<input type="tel" name="cellPhoneNo" maxlength="50" placeholder="전화번호를 입력해주세요." />
 			</div>
 		</div>
 		<hr />
