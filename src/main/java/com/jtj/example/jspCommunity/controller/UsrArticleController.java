@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Article;
@@ -21,6 +20,9 @@ public class UsrArticleController {
 	}
 
 	public String showList(HttpServletRequest req, HttpServletResponse resp) {
+		String searchKeywordType = req.getParameter("searchKeywordType");
+		String searchKeyword = req.getParameter("searchKeyword");
+
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
 
 		Board board = articleService.getBoardById(boardId);
@@ -33,12 +35,12 @@ public class UsrArticleController {
 
 		req.setAttribute("board", board);
 
-		int totalCount = articleService.getArticlesCountByBoardId(boardId);
-		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
+		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, searchKeywordType, searchKeyword);
 
 		req.setAttribute("articles", articles);
 		req.setAttribute("totalCount", totalCount);
-		
+
 		return "usr/article/list";
 	}
 
@@ -68,7 +70,7 @@ public class UsrArticleController {
 	}
 
 	public String doWrite(HttpServletRequest req, HttpServletResponse resp) {
-		if ((boolean)req.getAttribute("isLogined") == false) {
+		if ((boolean) req.getAttribute("isLogined") == false) {
 			req.setAttribute("alertMsg", "로그인후 사용해주세요.");
 			req.setAttribute("historyBack", true);
 			return "common/redirect";

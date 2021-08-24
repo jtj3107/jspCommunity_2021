@@ -41,6 +41,7 @@
 		<input type="hidden" name="boardId" value="${param.boardId}" />
 
 		<select name="searchKeywordType">
+			<option value="title,body">제목+본문</option>
 			<option value="title">제목</option>
 			<option value="body">본문</option>
 		</select>

@@ -9,7 +9,7 @@ import com.sbs.mysqliutil.MysqlUtil;
 import com.sbs.mysqliutil.SecSql;
 
 public class ArticleDao {
-	public List<Article> getForPrintArticlesByBoardId(int boardId) {
+	public List<Article> getForPrintArticlesByBoardId(int boardId, String searchKeywordType, String searchKeyword) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", M.name AS extra__writer");
@@ -20,8 +20,21 @@ public class ArticleDao {
 		sql.append("ON A.memberId = M.id");
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
+		sql.append("WHERE 1");
 		if (boardId != 0) {
-			sql.append("WHERE A.boardId = ?", boardId);
+			sql.append("AND A.boardId = ?", boardId);
+		}
+
+		if (searchKeyword != null) {
+			if (searchKeywordType != null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? , '%')", searchKeyword);
+			} else if (searchKeywordType != null || searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? , '%')", searchKeyword);
+			} else {
+				sql.append("AND A.title LIKE CONCAT('%', ? , '%')", searchKeyword);
+				sql.append("OR");
+				sql.append("A.body LIKE CONCAT('%', ? , '%')", searchKeyword);
+			}
 		}
 		sql.append("ORDER BY A.id DESC");
 
@@ -40,9 +53,9 @@ public class ArticleDao {
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
 		sql.append("WHERE A.id = ?", id);
-		
+
 		return MysqlUtil.selectRow(sql, Article.class);
-		
+
 	}
 
 	public Board getBoardById(int id) {
@@ -50,7 +63,7 @@ public class ArticleDao {
 		sql.append("SELECT B.*");
 		sql.append("FROM board AS B");
 		sql.append("WHERE B.id = ?", id);
-		
+
 		return MysqlUtil.selectRow(sql, Board.class);
 	}
 
@@ -63,7 +76,7 @@ public class ArticleDao {
 		sql.append(", memberId = ?", args.get("memberId"));
 		sql.append(", title = ?", args.get("title"));
 		sql.append(", `body` = ?", args.get("body"));
-		
+
 		return MysqlUtil.insert(sql);
 	}
 
@@ -71,7 +84,7 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("DELETE FROM article");
 		sql.append("WHERE id = ?", id);
-		
+
 		return MysqlUtil.delete(sql);
 	}
 
@@ -79,37 +92,51 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("UPDATE article");
 		sql.append("SET updateDate = NOW()");
-		
+
 		boolean needToUpdate = false;
-		
-		if( args.get("title") != null) {
+
+		if (args.get("title") != null) {
 			needToUpdate = true;
 			sql.append(", title = ?", args.get("title"));
 		}
-		
-		if(args.get("body") != null) {
+
+		if (args.get("body") != null) {
 			needToUpdate = true;
 			sql.append(", `body` = ?", args.get("body"));
 		}
-		
-		if( needToUpdate == false) {
+
+		if (needToUpdate == false) {
 			return 0;
 		}
 
 		sql.append("WHERE id = ?", args.get("id"));
-		
+
 		return MysqlUtil.update(sql);
 	}
 
-	public int getArticlesCountByBoardId(int boardId) {
+	public int getArticlesCountByBoardId(int boardId, String searchKeywordType, String searchKeyword) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT COUNT(*) AS cnt");
 		sql.append("FROM article AS A");
-		
-		if(boardId != 0) {
-			sql.append("WHERE A.boardId = ?", boardId);
+		sql.append("WHERE 1");
+
+		if (boardId != 0) {
+			sql.append("AND A.boardId = ?", boardId);
 		}
-		
+
+		if (searchKeyword != null) {
+			if (searchKeywordType != null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? , '%')", searchKeyword);
+			} else if (searchKeywordType != null || searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? , '%')", searchKeyword);
+			} else {
+				sql.append("AND A.title LIKE CONCAT('%', ? , '%')", searchKeyword);
+				sql.append("OR");
+				sql.append("A.body LIKE CONCAT('%', ? , '%')", searchKeyword);
+			}
+
+		}
+
 		return MysqlUtil.selectRowIntValue(sql);
 	}
 }
