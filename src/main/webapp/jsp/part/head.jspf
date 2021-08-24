@@ -11,6 +11,10 @@
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
+<!-- 데이지 UI 불러오기 
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" rel="stylesheet" type="text/css" />
+-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/common.css" />
 <script src="${pageContext.request.contextPath}/static/common.js" defer></script>
 
@@ -34,6 +38,7 @@
 
 				<c:if test="${isLogined == false}">
 					<a href="../member/login">로그인</a>
+					<a href="../member/findLoginId" >로그인아이디 찾기</a>
 					<a href="../member/join">회원가입</a>
 				</c:if>
 			</div>

@@ -122,4 +122,26 @@ public class UsrMemberController {
 		return "common/pure";
 	}
 
+	public String showFindLoginId(HttpServletRequest req, HttpServletResponse resp) {
+		return "usr/member/findLoginId";
+	}
+
+	public String doFindLoginId(HttpServletRequest req, HttpServletResponse resp) {
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+		
+		if(member == null) {
+			req.setAttribute("alertMsg", "존재하지 않는 회원입니다.");
+			req.setAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		req.setAttribute("alertMsg", String.format("회원님의 아이디는 `%s` 입니다.", member.getLoginId()));
+		req.setAttribute("replaceUrl", "../member/login?loginId=" + member.getLoginId());
+		return "common/redirect";
+		
+	}
+
 }

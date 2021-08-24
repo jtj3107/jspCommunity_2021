@@ -50,7 +50,7 @@
 		
 			<div>로그인 아이디</div>
 			<div>
-				<input type="text" name="loginId" maxlength="50" placeholder="로그인 아이디를 입력해주세요." />
+				<input type="text" name="loginId" maxlength="50" placeholder="로그인 아이디를 입력해주세요." value="${param.loginId}" />
 			</div>
 		</div>
 		<hr />
