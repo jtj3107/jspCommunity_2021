@@ -167,9 +167,18 @@ public class UsrMemberController {
 			return "common/redirect";
 		}
 		
-		memberService.sendTempLoginPwToEmail(member);
+		Map<String, Object> sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
 		
-		req.setAttribute("alertMsg", String.format("회원님의 임시비밀번호가 `%s` (으)로 발송 되었습니다.", member.getEmail()));
+		String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
+		String resultMsg = (String) sendTempLoginPwToEmailRs.get("msg");
+		
+		if(resultCode.startsWith("F-")) {
+			req.setAttribute("alertMsg", resultMsg);
+			req.setAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		req.setAttribute("alertMsg", resultMsg);
 		req.setAttribute("replaceUrl", "../member/login");
 		return "common/redirect";
 	}
