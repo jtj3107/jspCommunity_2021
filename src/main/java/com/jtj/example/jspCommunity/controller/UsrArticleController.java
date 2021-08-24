@@ -33,10 +33,12 @@ public class UsrArticleController {
 
 		req.setAttribute("board", board);
 
+		int totalCount = articleService.getArticlesCountByBoardId(boardId);
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
 
 		req.setAttribute("articles", articles);
-
+		req.setAttribute("totalCount", totalCount);
+		
 		return "usr/article/list";
 	}
 
