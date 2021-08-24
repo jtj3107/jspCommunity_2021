@@ -11,6 +11,7 @@ import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Article;
 import com.jtj.example.jspCommunity.dto.Board;
 import com.jtj.example.jspCommunity.service.ArticleService;
+import com.sbs.example.util.Util;
 
 public class UsrArticleController {
 	private ArticleService articleService;
@@ -23,6 +24,10 @@ public class UsrArticleController {
 		String searchKeywordType = req.getParameter("searchKeywordType");
 		String searchKeyword = req.getParameter("searchKeyword");
 
+		int itemsInAPage = 30;
+		int page = Util.getAsInt(req.getParameter("page"), 1);
+		int limitStart = (page - 1) * itemsInAPage;
+		
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
 
 		Board board = articleService.getBoardById(boardId);
@@ -36,7 +41,7 @@ public class UsrArticleController {
 		req.setAttribute("board", board);
 
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
-		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, limitStart, itemsInAPage, searchKeywordType, searchKeyword);
 
 		req.setAttribute("articles", articles);
 		req.setAttribute("totalCount", totalCount);

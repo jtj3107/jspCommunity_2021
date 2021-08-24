@@ -9,7 +9,7 @@ import com.sbs.mysqliutil.MysqlUtil;
 import com.sbs.mysqliutil.SecSql;
 
 public class ArticleDao {
-	public List<Article> getForPrintArticlesByBoardId(int boardId, String searchKeywordType, String searchKeyword) {
+	public List<Article> getForPrintArticlesByBoardId(int boardId, int limitStart, int limitCount, String searchKeywordType, String searchKeyword) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", M.name AS extra__writer");
@@ -37,6 +37,10 @@ public class ArticleDao {
 			}
 		}
 		sql.append("ORDER BY A.id DESC");
+		
+		if(limitCount != -1) {
+			sql.append("LIMIT ?, ?", limitStart, limitCount);
+		}
 
 		return MysqlUtil.selectRows(sql, Article.class);
 	}
