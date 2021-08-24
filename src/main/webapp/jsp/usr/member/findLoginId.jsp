@@ -51,7 +51,7 @@
 		<div>
 			<div>이메일</div>
 			<div>
-				<input type="email" name="email" maxlength="50" placeholder="이메일을 입력해주세요." />
+				<input type="email" name="email" maxlength="50" placeholder="회원의 이메일주소를 입력해주세요." />
 			</div>
 		</div>
 		<hr />

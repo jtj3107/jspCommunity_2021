@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.dto.Member;
+import com.jtj.example.jspCommunity.service.ArticleService;
 import com.jtj.example.jspCommunity.service.MemberService;
 import com.sbs.example.util.Util;
 
@@ -142,6 +143,35 @@ public class UsrMemberController {
 		req.setAttribute("replaceUrl", "../member/login?loginId=" + member.getLoginId());
 		return "common/redirect";
 		
+	}
+
+	public String showFindLoginPw(HttpServletRequest req, HttpServletResponse resp) {
+		return "usr/member/findLoginPw";
+	}
+
+	public String doFindLoginPw(HttpServletRequest req, HttpServletResponse resp) {
+		String loginId = req.getParameter("loginId");
+		String email = req.getParameter("email");
+		
+		Member member = memberService.getForPrintMemberByLoginId(loginId);
+		
+		if(member == null) {
+			req.setAttribute("alertMsg", "존재하지 않는 회원입니다.");
+			req.setAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		if(member.getEmail().equals(email) ==  false) {
+			req.setAttribute("alertMsg", "회원님의 이메일과 일치하지 않습니다.");
+			req.setAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		memberService.sendTempLoginPwToEmail(member);
+		
+		req.setAttribute("alertMsg", String.format("회원님의 임시비밀번호가 `%s` (으)로 발송 되었습니다.", member.getEmail()));
+		req.setAttribute("replaceUrl", "../member/login");
+		return "common/redirect";
 	}
 
 }
