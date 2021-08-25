@@ -56,7 +56,7 @@ public class UsrArticleController {
 		}
 		
 		// 이전버튼 페이지 계산
-		int pageBoxStartBeforePage = pageBoxEndPage + 1;
+		int pageBoxStartBeforePage = pageBoxStartPage - 1;
 		if(pageBoxStartBeforePage < 1) {
 			pageBoxStartBeforePage = 1;
 		}

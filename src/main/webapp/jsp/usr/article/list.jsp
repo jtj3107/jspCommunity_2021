@@ -84,9 +84,14 @@
 </style>
 
 <div class="con">
+	<!-- 
+	<c:set var="aUrl"
+		value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+	<a href="${aUrl}">◀◀</a>
+ 	-->
 	<c:if test="${pageBoxStartBeforeBtnNeedToShow}">
 		<c:set var="aUrl"
-			value="?page=${param.page - 1}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+			value="?page=${pageBoxStartBeforePage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 		<a href="${aUrl}">◀</a>
 	</c:if>
 
@@ -102,5 +107,11 @@
 			value="?page=${pageBoxEndAfterPage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 		<a href="${aUrl}">▶</a>
 	</c:if>
+
+	<!-- 
+	<c:set var="aUrl"
+		value="?page=${totalPage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+	<a href="${aUrl}">▶▶</a>
+	 -->
 </div>
 <%@ include file="../../part/foot.jspf"%>
