@@ -172,4 +172,36 @@ public class UsrMemberController {
 		return "common/redirect";
 	}
 
+	public String showModify(HttpServletRequest req, HttpServletResponse resp) {
+		return "usr/member/modify";
+	}
+
+	public String doModify(HttpServletRequest req, HttpServletResponse resp) {
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		String loginPw = (String) req.getParameter("loginPwReal");
+
+		if(loginPw != null && loginPw.length() == 0) {
+			loginPw = null;
+		}
+		
+		String name = (String) req.getParameter("name");
+		String nickname = (String) req.getParameter("nickname");
+		String email = (String) req.getParameter("email");
+		String cellPhoneNo = (String) req.getParameter("cellPhoneNo");
+
+		Map<String, Object> modifyArgs = new HashMap<>();
+		modifyArgs.put("loginPw", loginPw);
+		modifyArgs.put("name", name);
+		modifyArgs.put("nickname", nickname);
+		modifyArgs.put("email", email);
+		modifyArgs.put("cellPhoneNo", cellPhoneNo);
+		modifyArgs.put("id", loginedMemberId);
+
+		memberService.modify(modifyArgs);
+
+		req.setAttribute("alertMsg", "회원수정이 완료 되었습니다.");
+		req.setAttribute("replaceUrl", "../home/main");
+		return "common/redirect";
+	}
+
 }

@@ -93,7 +93,6 @@ public abstract class DispatcherServlet extends HttpServlet {
 		// 로그인 필요 필터링 인터셉터 시작
 
 		List<String> needToLoginActionUrls = new ArrayList<>();
-		List<String> needToLogoutActionUrls = new ArrayList<>();
 		
 		needToLoginActionUrls.add("/usr/member/doLogout");
 		needToLoginActionUrls.add("/usr/article/write");
@@ -101,16 +100,9 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionUrls.add("/usr/article/modify");
 		needToLoginActionUrls.add("/usr/article/doModify");
 		needToLoginActionUrls.add("/usr/article/doDelete");
-
-		needToLogoutActionUrls.add("/usr/member/login");
-		needToLogoutActionUrls.add("/usr/member/doLogin");
-		needToLogoutActionUrls.add("/usr/member/join");
-		needToLogoutActionUrls.add("/usr/member/doJoin");
-		needToLogoutActionUrls.add("/usr/member/findLoginId");
-		needToLogoutActionUrls.add("/usr/member/doFindLoginId");
-		needToLogoutActionUrls.add("/usr/member/findLoginPw");
-		needToLogoutActionUrls.add("/usr/member/doFindLoginPw");
-
+		needToLoginActionUrls.add("/usr/member/modify");
+		needToLoginActionUrls.add("/usr/member/doModify");
+		
 		if (needToLoginActionUrls.contains(actionUrl)) {
 			if ((boolean) req.getAttribute("isLogined") == false) {
 				req.setAttribute("alertMsg", "로그인 후 사용해주세요.");
@@ -120,17 +112,32 @@ public abstract class DispatcherServlet extends HttpServlet {
 				rd.forward(req, resp);
 			}
 		}
+
+		// 로그인 필요 필터링 인터셉터 끝
+		
+		// 로그아웃 필요 필터링 인터셉터 시작
+		List<String> needToLogoutActionUrls = new ArrayList<>();
+		
+		needToLogoutActionUrls.add("/usr/member/login");
+		needToLogoutActionUrls.add("/usr/member/doLogin");
+		needToLogoutActionUrls.add("/usr/member/join");
+		needToLogoutActionUrls.add("/usr/member/doJoin");
+		needToLogoutActionUrls.add("/usr/member/findLoginId");
+		needToLogoutActionUrls.add("/usr/member/doFindLoginId");
+		needToLogoutActionUrls.add("/usr/member/findLoginPw");
+		needToLogoutActionUrls.add("/usr/member/doFindLoginPw");
 		
 		if (needToLogoutActionUrls.contains(actionUrl)) {
 			if ((boolean) req.getAttribute("isLogined")) {
 				req.setAttribute("alertMsg", "이미 로그인 상태 입니다.");
-				req.setAttribute("replaceUrl", "../home/main");
+				req.setAttribute("historyBack", true);
 
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/common/redirect.jsp");
 				rd.forward(req, resp);
 			}
 		}
-		// 로그인 필요 필터링 인터셉터 끝
+		
+		// 로그아웃 필요 필터링 인터셉터 끝
 
 		Map<String, Object> rs = new HashMap<>();
 		rs.put("controllerName", controllerName);

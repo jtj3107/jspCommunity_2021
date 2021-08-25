@@ -89,9 +89,9 @@ public class MemberDao {
 			sql.append(", email = ?", args.get("email"));
 		}
 		
-		if(args.get("cellphoneNo") != null) {
+		if(args.get("cellPhoneNo") != null) {
 			needToUpdate = true;
-			sql.append(", cellphoneNo = ?", args.get("cellphoneNo"));
+			sql.append(", cellPhoneNo = ?", args.get("cellPhoneNo"));
 		}
 		
 		if(args.get("authLevel") != null) {
