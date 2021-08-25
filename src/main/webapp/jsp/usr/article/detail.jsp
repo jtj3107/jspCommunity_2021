@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
-										
+
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
 
@@ -17,7 +17,9 @@
 	<br />
 	제목 : ${article.title}
 	<hr />
-	${article.body}
+	<div class="toast-ui-viewer">
+		<script type="text/x-template">${article.body} </script>
+	</div>
 </div>
 <hr />
 <div>

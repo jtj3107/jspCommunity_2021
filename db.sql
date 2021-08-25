@@ -128,6 +128,7 @@ SELECT id, loginPw, SHA2(loginPw, 256)
 FROM `member` 
 WHERE id < 10;
 
+# 기존회원의 비번을 암호화
 UPDATE `member`
 SET loginPw = SHA2(loginPw, 256)
 WHERE id < 10;
