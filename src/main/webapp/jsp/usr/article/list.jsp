@@ -37,7 +37,7 @@
 		}
 	</script>
 
-	<form action="" onsubmit="DoSearchForm__submit(this); return false;">
+	<form onsubmit="DoSearchForm__submit(this); return false;">
 		<input type="hidden" name="boardId" value="${param.boardId}" />
 
 		<select name="searchKeywordType">
@@ -76,4 +76,31 @@
 		<hr />
 	</div>
 </c:forEach>
+
+<style>
+.red {
+	color: red;
+}
+</style>
+
+<div class="con">
+	<c:if test="${pageBoxStartBeforeBtnNeedToShow}">
+		<c:set var="aUrl"
+			value="?page=${param.page - 1}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+		<a href="${aUrl}">◀</a>
+	</c:if>
+
+	<c:forEach var="i" begin="${pageBoxStartPage}" end="${pageBoxEndPage}" step="1">
+		<c:set var="aClass" value="${page == i ? 'red' : ''}" />
+		<c:set var="aUrl"
+			value="?page=${i}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+		<a class="${aClass}" href="${aUrl}">${i}</a>
+	</c:forEach>
+
+	<c:if test="${pageBoxEndAfterBtnNeedToShow}">
+		<c:set var="aUrl"
+			value="?page=${pageBoxEndAfterPage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+		<a href="${aUrl}">▶</a>
+	</c:if>
+</div>
 <%@ include file="../../part/foot.jspf"%>

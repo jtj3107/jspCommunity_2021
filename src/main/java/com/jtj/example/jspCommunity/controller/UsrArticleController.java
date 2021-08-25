@@ -27,7 +27,7 @@ public class UsrArticleController {
 		int itemsInAPage = 30;
 		int page = Util.getAsInt(req.getParameter("page"), 1);
 		int limitStart = (page - 1) * itemsInAPage;
-		
+
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
 
 		Board board = articleService.getBoardById(boardId);
@@ -38,14 +38,54 @@ public class UsrArticleController {
 			return "common/redirect";
 		}
 
-		req.setAttribute("board", board);
-
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
-		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, limitStart, itemsInAPage, searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, limitStart, itemsInAPage,
+				searchKeywordType, searchKeyword);
+		
+		int totalPage = (int)Math.ceil((double)totalCount / itemsInAPage);
 
+		int pageBoxSize = 5;
+		
+		// 현재 페이지 박스 시작, 끝 계산
+		int previousPageBoxesCount = (page -1) / pageBoxSize;
+		int pageBoxStartPage = pageBoxSize * previousPageBoxesCount + 1;
+		int pageBoxEndPage = pageBoxStartPage + pageBoxSize - 1;
+		
+		if(pageBoxEndPage > totalPage) {
+			pageBoxEndPage = totalPage;
+		}
+		
+		// 이전버튼 페이지 계산
+		int pageBoxStartBeforePage = pageBoxEndPage + 1;
+		if(pageBoxStartBeforePage < 1) {
+			pageBoxStartBeforePage = 1;
+		}
+		
+		// 다음버튼 페이지 계산
+		int pageBoxEndAfterPage = pageBoxEndPage + 1;
+		
+		if(pageBoxEndAfterPage > totalPage) {
+			pageBoxEndAfterPage = totalPage;
+		}
+		
+		// 이전버튼 노출여부 계산
+		boolean pageBoxStartBeforeBtnNeedToShow = pageBoxStartBeforePage != pageBoxStartPage;
+		// 다음버튼 노출여부 계산
+		boolean pageBoxEndAfterBtnNeedToShow = pageBoxEndAfterPage != pageBoxEndPage;
+		
+		req.setAttribute("board", board);
 		req.setAttribute("articles", articles);
 		req.setAttribute("totalCount", totalCount);
+		req.setAttribute("page", page);
+		req.setAttribute("totalPage", totalPage);
 
+		req.setAttribute("pageBoxStartBeforeBtnNeedToShow", pageBoxStartBeforeBtnNeedToShow);
+		req.setAttribute("pageBoxEndAfterBtnNeedToShow", pageBoxEndAfterBtnNeedToShow);
+		req.setAttribute("pageBoxStartBeforePage", pageBoxStartBeforePage);
+		req.setAttribute("pageBoxEndAfterPage", pageBoxEndAfterPage);
+		req.setAttribute("pageBoxStartPage", pageBoxStartPage);
+		req.setAttribute("pageBoxEndPage", pageBoxEndPage);
+		
 		return "usr/article/list";
 	}
 
