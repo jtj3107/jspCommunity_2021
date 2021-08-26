@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.jtj.example.jspCommunity.dto.ResultData;
 
 public class Controller {
-	protected String msgAndBack(HttpServletRequest req, String msg) {
+	protected String msgAndBack(HttpServletRequest req, String msg) {	
 		req.setAttribute("alertMsg", msg);
 		req.setAttribute("historyBack", true);
 		return "common/redirect";
