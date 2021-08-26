@@ -10,5 +10,4 @@ public class UsrHomeController {
 	public String showMain(HttpServletRequest req, HttpServletResponse resp) {
 		return "usr/home/main";
 	}
-
 }
