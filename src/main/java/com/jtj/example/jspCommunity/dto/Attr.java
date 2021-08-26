@@ -1,5 +1,7 @@
 package com.jtj.example.jspCommunity.dto;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -16,4 +18,16 @@ public class Attr {
 	private String typeCode;
 	private String type2Code;
 	private String value;
+	
+	public Attr(Map<String, Object> map) {
+		this.id = (int) map.get("id");
+		this.regDate = (String) map.get("regDate");
+		this.updateDate = (String) map.get("updateDate");
+		this.expireDate = (String) map.get("expireDate");
+		this.relTypeCode = (String) map.get("relTypeCode");
+		this.relId = (int) map.get("relId");
+		this.typeCode = (String) map.get("typeCode");
+		this.type2Code = (String) map.get("type2Code");
+		this.value = (String) map.get("value");
+	}
 }

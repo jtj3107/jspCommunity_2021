@@ -41,7 +41,7 @@ public class AttrDao {
 		sql.append("AND `type2Code` = ?", type2Code);
 		sql.append("AND  (expireDate >= NOW() OR expireDate IS NULL)");
 
-		return MysqlUtil.selectRow(sql);
+		return new Attr(MysqlUtil.selectRow(sql));
 	}
 
 	public String getValue(String relTypeCode, int relId, String typeCode, String type2Code) {
