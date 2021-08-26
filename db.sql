@@ -106,7 +106,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-boardId = 1,
+boardId = 3,
 title = '제목4',
 `body` = '내용4';
 
@@ -114,7 +114,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-boardId = 1,
+boardId = 2,
 title = '제목5',
 `body` = '내용5';
 
@@ -128,8 +128,32 @@ SELECT id, loginPw, SHA2(loginPw, 256)
 FROM `member` 
 WHERE id < 10;
 
-# 기존회원의 비번을 암호화
 UPDATE `member`
 SET loginPw = SHA2(loginPw, 256)
 WHERE id < 10;
 
+SELECT * FROM `member`
+
+# 부가정보테이블 
+# 댓글 테이블 추가
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `relTypeCode` CHAR(20) NOT NULL, # 관련타입코드
+    `relId` INT(10) UNSIGNED NOT NULL, # 관련데이터번호
+    `typeCode` CHAR(30) NOT NULL, # extra
+    `type2Code` CHAR(30) NOT NULL, # isTempPasswordUsing
+    `value` TEXT NOT NULL # 0
+);
+
+# attr 유니크 인덱스 걸기
+## 중복변수 생성금지
+## 변수찾는 속도 최적화
+ALTER TABLE `attr` ADD UNIQUE INDEX (`relTypeCode`, `relId`, `typeCode`, `type2Code`); 
+
+## 특정 조건을 만족하는 회원 또는 게시물(기타 데이터)를 빠르게 찾기 위해서
+ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
+
+# attr에 만료날짜 추가
+ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;

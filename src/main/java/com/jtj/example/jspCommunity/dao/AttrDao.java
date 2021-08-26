@@ -1,26 +1,30 @@
 package com.jtj.example.jspCommunity.dao;
 
+import java.util.Map;
+
 import com.jtj.example.jspCommunity.dto.Attr;
 import com.sbs.mysqliutil.MysqlUtil;
 import com.sbs.mysqliutil.SecSql;
 
 public class AttrDao {
-	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code, String value, String expireDate) {
+	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code, String value,
+			String expireDate) {
 		SecSql sql = new SecSql();
 
-		sql.append("INSERT INTO attr (regDate, updateDate, expireDate, `relTypeCode`, `relId`, `typeCode`, `type2Code`, `value`)");
+		sql.append(
+				"INSERT INTO attr (regDate, updateDate, expireDate, `relTypeCode`, `relId`, `typeCode`, `type2Code`, `value`)");
 
-		if ( expireDate == null ) {
-			sql.append("VALUES (NOW(), NOW(), NULL, ?, ?, ?, ?, ?)", relTypeCode, relId, typeCode, type2Code, value);			
-		}
-		else {
-			sql.append("VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?)", expireDate, relTypeCode, relId, typeCode, type2Code, value);
+		if (expireDate == null) {
+			sql.append("VALUES (NOW(), NOW(), NULL, ?, ?, ?, ?, ?)", relTypeCode, relId, typeCode, type2Code, value);
+		} else {
+			sql.append("VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?)", expireDate, relTypeCode, relId, typeCode, type2Code,
+					value);
 		}
 
 		sql.append("ON DUPLICATE KEY UPDATE");
 		sql.append("updateDate = NOW()");
 
-		if ( expireDate != null ) {
+		if (expireDate != null) {
 			sql.append(", expireDate = ?", expireDate);
 		}
 

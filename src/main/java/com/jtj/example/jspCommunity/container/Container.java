@@ -28,14 +28,14 @@ public class Container {
 	public static UsrHomeController homeController;
 
 	static {
+		attrDao = new AttrDao();
 		memberDao = new MemberDao();
 		articleDao = new ArticleDao();
-		attrDao = new AttrDao();
 		
+		attrService = new AttrService();
 		emailService = new EmailService();
 		memberService = new MemberService();
 		articleService = new ArticleService();
-		attrService = new AttrService();
 		
 		memberController = new UsrMemberController();
 		admMemberController = new AdmMemberController();
