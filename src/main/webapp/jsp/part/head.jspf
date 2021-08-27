@@ -5,6 +5,9 @@
 <meta charset="UTF-8" />
 <title>${pageTitle}</title>
 
+<!-- 반응형 모바일을 위해 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -54,31 +57,76 @@
 
 </head>
 <body>
-	<header class="top-bar con-min-width">
-		<div class="con">
-			<c:if test="${isLogined}">
-				<div>로그인된 회원의 닉네임 : ${loginedMember.nickname}</div>
-			</c:if>
+	<div class="body-content">
+		<header class="top-bar con-min-width">
+			<div class="con flex height-100p">
+				<a href="../home/main" class="logo flex flex-ai-c">
+					<span>
+						<i class="fas fa-keyboard"></i>
+					</span>
+					<span>Devly</span>
+				</a>
 
-			<div>
-				<a href="../home/main">메인</a>
-				<a href="../article/list?boardId=1">공지사항 게시물 리스트</a>
+				<div class="flex-grow-1"></div>
 
-				<c:if test="${isLogined}">
-					<a href="../article/write?boardId=1">공지사항 글쓰기</a>
-					<a href="../member/modify">회원정보수정</a>
-					<a href="../member/doLogout">로그아웃</a>
-				</c:if>
+				<nav class="top-bar__menu-box-1">
+					<ul class="flex height-100p">
+						<c:if test="${isLogined}">
+							<li>
+								<a href="../member/modify" class="flex flex-ai-c height-100p">
+									<span>
+										<i class="fas fa-sign-in-alt"></i>
+									</span>
+									<span>회원정보수정</span>
+								</a>
+							</li>
+							<li>
+								<a href="../member/doLogout" class="flex flex-ai-c height-100p">
+									<span>
+										<i class="fas fa-sign-in-alt"></i>
+									</span>
+									<span>로그아웃</span>
+								</a>
+							</li>
+						</c:if>
 
-
-				<c:if test="${isLogined == false}">
-					<a href="../member/login">로그인</a>
-					<a href="../member/findLoginId">로그인아이디 찾기</a>
-					<a href="../member/findLoginPw">로그인비밀번호 찾기</a>
-					<a href="../member/join">회원가입</a>
-				</c:if>
+						<c:if test="${isLogined == false}">
+							<li>
+								<a href="../member/login" class="flex flex-ai-c height-100p">
+									<span>
+										<i class="fas fa-sign-in-alt"></i>
+									</span>
+									<span>로그인</span>
+								</a>
+							</li>
+							<li>
+								<a href="../member/join" class="flex flex-ai-c height-100p">
+									<span>
+										<i class="fas fa-user-plus"></i>
+									</span>
+									<span>회원가입</span>
+								</a>
+							</li>
+							<li>
+								<a href="../member/findLoginId" class="flex flex-ai-c height-100p">
+									<span>
+										<i class="far fa-user-circle"></i>
+									</span>
+									<span>아이디찾기</span>
+								</a>
+							</li>
+							<li>
+								<a href="../member/findLoginPw" class="flex flex-ai-c height-100p">
+									<span>
+										<i class="far fa-user-circle"></i>
+									</span>
+									<span>비번찾기</span>
+								</a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
 			</div>
-		</div>
-	</header>
+		</header>
 
-	<main>
+		<main>
