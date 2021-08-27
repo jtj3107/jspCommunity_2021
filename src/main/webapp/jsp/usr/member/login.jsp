@@ -86,7 +86,7 @@
 					<td>
 						<div>
 							<div class="btn-wrap">
-								<input type="submit" value="로그인" class="btn btn-success" />
+								<input type="submit" value="로그인" class="btn primary" />
 								<button type="button" onclick="history.back();" class="btn btn-info">뒤로가기</button>
 							</div>
 						</div>
