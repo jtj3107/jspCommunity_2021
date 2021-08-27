@@ -60,9 +60,8 @@ a {
 }
 
 .flex-1-0-0 {
-	flex: 1 0 0;
+  flex: 1 0 0;
 }
-
 
 .flex-grow-1 {
   flex-grow:1;
@@ -77,7 +76,7 @@ a {
 }
 
 .flex-jc-e {
-	justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .height-100p {
@@ -168,7 +167,6 @@ a {
 	--top-bar__height:100px;
 }
 
-
 .top-bar {
   height:var(--top-bar__height);
   background-color:black;
@@ -217,7 +215,6 @@ a {
 .top-bar__menu-box-1 > ul > li > div > div > ul > li:hover > a {
 	text-decoration: underline;
 }
-
 
 /* 탑바 끝 */
 
@@ -288,11 +285,17 @@ a {
   left:100%;
   width:100%;
   height:100%;
-  transition:left 0.3s;
+  opacity:0;
+  visibility:hidden;
+  transition:left 0.3s, opacity 0.3s, visibility 0.3s;
+  display: flex;
+  align-items: center;
 }
 
 html.mobile-side-bar-actived .mobile-side-bar {
 	left:0;
+	opacity: 1;
+	visibility: visible;
 }
 
 @media ( max-width:800px ) {
@@ -300,13 +303,42 @@ html.mobile-side-bar-actived .mobile-side-bar {
 	html.mobile-side-bar-actived > body {
 		overflow: hidden;
 	}
-} 
-/* 모바일 사이드바 끝 */
+}
 
+.mobile-side-bar__menu-box-1 {
+	width:100%;
+}
+
+.mobile-side-bar__menu-box-1 ul > li > a {
+  padding:10px 0;
+  text-align: center;
+}
+
+.mobile-side-bar__menu-box-1 ul > li > a:not(:only-child)::after {
+	content:"[+]";
+}
+
+.mobile-side-bar__menu-box-1 ul > li:hover > a:not(:only-child)::after {
+	content:"[-]";
+}
+
+.mobile-side-bar__menu-box-1 ul > li:hover > a {
+	background-color:white;
+	color:black;
+}
+
+.mobile-side-bar__menu-box-1 > ul ul {
+	display: none;
+	background-color:#454545;
+}
+
+.mobile-side-bar__menu-box-1 ul > li:hover > ul {
+	display: block;
+}
+/* 모바일 사이드바 끝 */
 
 /* 타이틀 시작 */
 .title-bar {
-  margin-top:30px;
   margin-bottom:20px;
 }
 /* 타이틀 끝 */
