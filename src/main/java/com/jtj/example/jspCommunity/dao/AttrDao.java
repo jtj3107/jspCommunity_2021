@@ -3,6 +3,7 @@ package com.jtj.example.jspCommunity.dao;
 import java.util.Map;
 
 import com.jtj.example.jspCommunity.dto.Attr;
+import com.sbs.example.util.Util;
 import com.sbs.mysqliutil.MysqlUtil;
 import com.sbs.mysqliutil.SecSql;
 
@@ -44,7 +45,7 @@ public class AttrDao {
 		sql.append("AND `typeCode` = ?", typeCode);
 		sql.append("AND `type2Code` = ?", type2Code);
 		sql.append("AND  (expireDate >= NOW() OR expireDate IS NULL)");
-
+		
 		return new Attr(MysqlUtil.selectRow(sql));
 	}
 
@@ -59,7 +60,7 @@ public class AttrDao {
 		sql.append("AND `typeCode` = ?", typeCode);
 		sql.append("AND `type2Code` = ?", type2Code);
 		sql.append("AND  (expireDate >= NOW() OR expireDate IS NULL)");
-
+		
 		return MysqlUtil.selectRowStringValue(sql);
 	}
 

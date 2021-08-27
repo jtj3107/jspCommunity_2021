@@ -75,7 +75,8 @@ public class UsrMemberController extends Controller{
 		joinArgs.put("email", email);
 		joinArgs.put("cellPhoneNo", cellPhoneNo);
 
-		memberService.join(joinArgs);
+		int id = memberService.join(joinArgs);
+		memberService.setIsUsingTempPassword(id, false);
 
 		return msgAndReplace(req, "회원가입이 완료 되었습니다.", "../home/main");
 	}
@@ -110,14 +111,26 @@ public class UsrMemberController extends Controller{
 		HttpSession session = req.getSession();
 
 		session.setAttribute("loginedMemberId", member.getId());
-
-		boolean isUsingTempPasword = memberService.getIsUsingTempPassword(member.getId());
 		
 		String alertMsg = String.format("%s님 환영합니다.", member.getNickname());
 		String replaceUrl = "../home/main";
 		
+		if(Util.isEmpty(req.getParameter("afterLoginUrl")) == false) {
+			replaceUrl = req.getParameter("afterLoginUrl");
+		}
+		
+		boolean isUsingTempPasword = memberService.isUsingTempPassword(member.getId());
+		
 		if(isUsingTempPasword) {
 			alertMsg = String.format("%s님 현재 임시 비밀번호를 사용중입니다. 변경 후 이용해주세요.", member.getNickname());
+			replaceUrl = "../member/modify";
+		}
+		
+		boolean isNeedtoModifyOldLoginPw = memberService.isNeedtoModifyOldLoginPw(member.getId());
+		
+		if(isNeedtoModifyOldLoginPw) {
+			int oldPasswordDays = memberService.getOldPasswordDays();
+			alertMsg = String.format("가장 마지막 비밀번호 변경일로부터 " + oldPasswordDays + "일이 경과하였습니다. 비밀번호를 변경해주세요.", member.getNickname());
 			replaceUrl = "../member/modify";
 		}
 		

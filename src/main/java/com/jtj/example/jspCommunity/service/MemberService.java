@@ -26,8 +26,12 @@ public class MemberService {
 		return memberDao.getForPrintMembers();
 	}
 
-	public void join(Map<String, Object> args) {
-		memberDao.join(args);
+	public int join(Map<String, Object> args) {
+		int id = memberDao.join(args);
+		
+		setLoginPwModifiedNow(id);
+		
+		return id;
 	}
 
 	public Member getForPrintMemberByLoginId(String loginId) {
@@ -79,12 +83,42 @@ public class MemberService {
 		attrService.setValue("member__" + actorId + "__extra__isUsingTempPassword", use, null);
 	}
 	
-	public boolean getIsUsingTempPassword(int actorId) {
+	public boolean isUsingTempPassword(int actorId) {
 		return attrService.getValueASBoolean("member__" + actorId + "__extra__isUsingTempPassword");
 	}
 
 	public void modify(Map<String, Object> param) {
+		if(param.get("loginPw") != null) {
+			setLoginPwModifiedNow((int) param.get("id"));
+		}
+		
 		memberDao.modify(param);
+	}
+	
+	private void setLoginPwModifiedNow(int actorId) {
+		attrService.setValue("member__" + actorId + "__extra__loginPwModifiedDate", Util.getNowDateStr(), null);
+	}
+	
+	public int getOldPasswordDays() {
+		return 90;
+	}
+
+	public boolean isNeedtoModifyOldLoginPw(int actorId) {
+		String date = attrService.getValue("member__" + actorId + "__extra__loginPwModifiedDate");
+		
+		if(Util.isEmpty(date)) {
+			return true;
+		}
+		
+		int pass = Util.getPassedSecondsFrom(date);
+		
+		int oldPasswordDays = getOldPasswordDays();
+		
+		if( pass > oldPasswordDays * 60 * 60 * 24) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }

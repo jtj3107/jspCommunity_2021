@@ -17,7 +17,7 @@ public class MemberDao {
 		return MysqlUtil.selectRows(sql, Member.class);
 	}
 
-	public void join(Map<String, Object> args) {
+	public int join(Map<String, Object> args) {
 		SecSql sql = new SecSql();
 		sql.append("INSERT INTO `member`");
 		sql.append("SET regDate = NOW()");
@@ -29,7 +29,7 @@ public class MemberDao {
 		sql.append(", loginId = ?", args.get("loginId"));
 		sql.append(", loginPw = ?", args.get("loginPw"));
 
-		MysqlUtil.insert(sql);
+		return MysqlUtil.insert(sql);
 	}
 
 	public Member getForPrintMemberByLoginId(String loginId) {
