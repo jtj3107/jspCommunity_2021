@@ -1,3 +1,4 @@
+// 토스트에디터 시작
 function getUriParams(uri) {
   uri = uri.trim();
   uri = uri.replaceAll('&amp;', '&');
@@ -215,6 +216,12 @@ function ToastEditor__init() {
   });
 }
 
+$(function() {
+  ToastEditor__init();
+  ToastEditorView__init();
+});
+// 토스트에디터 끝
+
 function ToastEditorView__init() {
   $('.toast-ui-viewer').each(function(index, node) {
     const $node = $(node);
@@ -244,8 +251,25 @@ function ToastEditorView__init() {
     $node.data('data-toast-editor', viewer);
   });
 }
+function MobileTopBar__init() {
+	$('.mobile-top-bar__btn-toggle-mobile-side-bar').click(function() {
+		if ( $(this).hasClass('active') ) {
+			MobileTopBar__hide();
+		}
+		else {
+			MobileTopBar__show();
+		}
+	});
+}
 
-$(function() {
-  ToastEditor__init();
-  ToastEditorView__init();
-});
+function MobileTopBar__show() {
+	$('.mobile-top-bar__btn-toggle-mobile-side-bar').addClass('active');
+	$('html').addClass('mobile-side-bar-actived');
+}
+
+function MobileTopBar__hide() {
+	$('.mobile-top-bar__btn-toggle-mobile-side-bar').removeClass('active');
+	$('html').removeClass('mobile-side-bar-actived');
+}
+
+MobileTopBar__init(); 
