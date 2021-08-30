@@ -3,8 +3,15 @@
 
 <c:set var="pageTitle" value="${board.name} 게시물 수정" />
 <%@ include file="../../part/head.jspf"%>
-<h1>${pageTitle}</h1>
-<div>
+<div class="title-bar padding-0-10 con-min-width">
+	<h1 class="con">
+		<span>
+			<i class="fas fa-pen"></i>
+		</span>
+		<span>${pageTitle}</span>
+	</h1>
+</div>
+<div class="article-modify-form-box form-box padding-0-10 con-min-width">
 	<script>
 		let DoModifyForm__submited = false;
 
@@ -42,32 +49,54 @@
 		}
 	</script>
 
-	<form action="doModify" method="POST" onsubmit="DoModifyForm__submit(this); return false;">
+	<form class="con" action="doModify" method="POST" onsubmit="DoModifyForm__submit(this); return false;">
 		<input type="hidden" name="id" value="${article.id}" />
 		<input type="hidden" name="body" />
 
-		<hr />
-		<div>
-			<div>제목</div>
-			<div>
-				<input type="text" name="title" maxlength="50" placeholder="제목을 입력해주세요." value="${article.title}" />
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>내용</div>
-			<div class="toast-ui-editor">
-				<script type="text/x-template">${article.body}</script>
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>작성</div>
-			<div>
-				<input type="submit" value="수정" />
-				<button type="button" onclick="history.back();">뒤로가기</button>
-			</div>
-		</div>
+		<table>
+			<colgroup>
+				<col width="150">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>
+						<span>제목</span>
+					</th>
+					<td>
+						<div>
+							<input name="title" type="text" maxlength="50" placeholder="제목을 입력해주세요." value="${article.title}" />
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th>
+						<span>내용</span>
+					</th>
+					<td>
+						<div>
+							<div>
+								<script type="text/x-template">${article.body}</script>
+								<div class="toast-ui-editor"></div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>수정</span>
+					</th>
+					<td>
+						<div>
+							<div class="btn-wrap">
+								<input class="btn btn-primary" type="submit" value="수정" />
+								<button class="btn btn-info" type="button" onclick="history.back();">뒤로가기</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</form>
 </div>
 <%@ include file="../../part/foot.jspf"%>

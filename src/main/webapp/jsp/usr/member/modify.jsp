@@ -7,8 +7,15 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
-<h1>${pageTitle}</h1>
-<div>
+<div class="title-bar padding-0-10 con-min-width">
+	<h1 class="con">
+		<span>
+			<i class="fas fa-user"></i>
+		</span>
+		<span>${pageTitle}</span>
+	</h1>
+</div>
+<div class="modify-form-box form-box padding-0-10 con-min-width">
 	<script>
 		let DoModifyForm__submited = false;
 
@@ -86,63 +93,97 @@
 		}
 	</script>
 
-	<form action="doModify" method="POST" onsubmit="DoModifyForm__submit(this); return false;">
+	<form class="con" action="doModify" method="POST" onsubmit="DoModifyForm__submit(this); return false;">
 		<input type="hidden" name="loginPwReal" />
-		<hr />
-		<div>
-			<div>로그인 아이디</div>
-			<div>${loginedMember.loginId}</div>
-		</div>
-		<hr />
-		<div>
-			<div>로그인 비밀번호</div>
-			<div>
-				<input type="password" name="loginPw" maxlength="50" placeholder="로그인 비밀번호를 입력해주세요." />
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>로그인 비밀번호 확인</div>
-			<div>
-				<input type="password" name="loginPwConfirm" maxlength="50" placeholder="로그인 비밀번호 확인을 입력해주세요." />
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>이름</div>
-			<div>
-				<input type="text" name="name" maxlength="50" placeholder="이름을 입력해주세요." value="${loginedMember.name}" />
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>별명</div>
-			<div>
-				<input type="text" name="nickname" maxlength="50" placeholder="닉네임을 입력해주세요." value="${loginedMember.nickname}"/>
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>이메일</div>
-			<div>
-				<input type="email" name="email" maxlength="50" placeholder="이메일을 입력해주세요." value="${loginedMember.email}"/>
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>전화번호</div>
-			<div>
-				<input type="tel" name="cellPhoneNo" maxlength="50" placeholder="전화번호를 입력해주세요." value="${loginedMember.cellPhoneNo}"/>
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>회원정보 수정</div>
-			<div>
-				<input type="submit" value="수정" />
-				<button type="button" onclick="history.back();">뒤로가기</button>
-			</div>
-		</div>
+		<table>
+			<colgroup>
+				<col width="150">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>
+						<span>로그인 아이디</span>
+					</th>
+					<td>
+						<div>${loginedMember.loginId}</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>로그인 비번</span>
+					</th>
+					<td>
+						<div>
+							<input name="loginPw" type="password" maxlength="50" placeholder="로그인 비밀버호를 입력해주세요." />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>로그인 비밀번호 확인</span>
+					</th>
+					<td>
+						<div>
+							<input name="loginPwConfirm" type="password" maxlength="50" placeholder="로그인 비밀버호 확인을 입력해주세요." />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>이름</span>
+					</th>
+					<td>
+						<div>
+							<input name="name" type="text" maxlength="50" placeholder="이름을 입력해주세요." value="${loginedMember.name}" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>별명</span>
+					</th>
+					<td>
+						<div>
+							<input name="nickname" type="text" maxlength="50" placeholder="별명을 입력해주세요." value="${loginedMember.nickname}" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>이메일</span>
+					</th>
+					<td>
+						<div>
+							<input name="email" type="email" maxlength="100" placeholder="이메일을 입력해주세요." value="${loginedMember.email}" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>전화번호</span>
+					</th>
+					<td>
+						<div>
+							<input name="cellPhoneNo" type="tel" maxlength="100"
+								placeholder="전화번호를 입력해주세요." value="${loginedMember.cellPhoneNo}" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span>회원정보수정</span>
+					</th>
+					<td>
+						<div>
+							<div class="btn-wrap">
+								<input class="btn btn-primary" type="submit" value="수정" />
+								<button class="btn btn-info" type="button" onclick="history.back();">뒤로가기</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</form>
 </div>
 <%@ include file="../../part/foot.jspf"%>
