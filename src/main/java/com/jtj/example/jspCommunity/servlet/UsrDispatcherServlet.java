@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jtj.example.jspCommunity.container.Container;
 import com.jtj.example.jspCommunity.controller.UsrArticleController;
 import com.jtj.example.jspCommunity.controller.UsrHomeController;
+import com.jtj.example.jspCommunity.controller.UsrLikeController;
 import com.jtj.example.jspCommunity.controller.UsrMemberController;
 
 @WebServlet("/usr/*")
@@ -17,12 +18,12 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 		String jspPath = null;
 
 		if (controllerName.equals("home")) {
-			UsrHomeController homeController = Container.homeController;
+			UsrHomeController homeController = Container.usrHomeController;
 			if (actionMethodName.equals("main")) {
 				jspPath = homeController.showMain(req, resp);
 			}
 		} else if (controllerName.equals("member")) {
-			UsrMemberController memberController = Container.memberController;
+			UsrMemberController memberController = Container.usrMemberController;
 
 			if (actionMethodName.equals("join")) {
 				jspPath = memberController.showJoin(req, resp);
@@ -51,7 +52,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			}
 
 		} else if (controllerName.equals("article")) {
-			UsrArticleController articleController = Container.articleController;
+			UsrArticleController articleController = Container.usrArticleController;
 
 			if (actionMethodName.equals("list")) {
 				jspPath = articleController.showList(req, resp);
@@ -68,7 +69,20 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			} else if (actionMethodName.equals("doModify")) {
 				jspPath = articleController.doModify(req, resp);
 			}
+		} else if (controllerName.equals("like")) {
+			UsrLikeController likeController = Container.usrLikeController;
+
+			if (actionMethodName.equals("doLike")) {
+				jspPath = likeController.doLike(req, resp);
+			} else if (actionMethodName.equals("doCancelLike")) {
+				jspPath = likeController.doCancelLike(req, resp);
+			} else if (actionMethodName.equals("doDislike")) {
+				jspPath = likeController.doDislike(req, resp);
+			} else if (actionMethodName.equals("doCancelDislike")) {
+				jspPath = likeController.doCancelDislike(req, resp);
+			}
 		}
+		
 		return jspPath;
 	}
 }

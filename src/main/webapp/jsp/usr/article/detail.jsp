@@ -72,7 +72,7 @@
 <div class="article-btn-box padding-0-10 con-min-width">
 	<div class="con btn-wrap">
 		<c:if test="${article.extra__actorCanLike}">
-			<a class="btn btn-primary" href="${param.listUrl}">
+			<a class="btn btn-primary" href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if(!confirm('`좋아요` 처리 하시겠습니다?')) return false;">
 				<span>
 					<i class="fas fa-thumbs-up"></i>
 				</span>
@@ -81,7 +81,7 @@
 		</c:if>
 		
 		<c:if test="${article.extra__actorCanCancelLike}">
-			<a class="btn btn-info" href="${param.listUrl}">
+			<a class="btn btn-info" href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if(!confirm('`좋아요` 취소 처리 하시겠습니다?')) return false;">
 				<span>
 					<i class="fas fa-slash"></i>
 				</span>
@@ -90,7 +90,7 @@
 		</c:if>
 		
 		<c:if test="${article.extra__actorCanDisLike}">
-			<a class="btn btn-danger" href="${param.listUrl}">
+			<a class="btn btn-danger" href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if(!confirm('`싫어요` 처리 하시겠습니다?')) return false;">
 				<span>
 					<i class="fas fa-thumbs-down"></i>
 				</span>
@@ -99,7 +99,7 @@
 		</c:if>
 		
 		<c:if test="${article.extra__actorCanCancelDisLike}">
-			<a class="btn btn-primary" href="${param.listUrl}">
+			<a class="btn btn-primary" href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if(!confirm('`싫어요` 취소 처리 하시겠습니다?')) return false;">
 				<span>
 					<i class="fas fa-slash"></i>
 				</span>
