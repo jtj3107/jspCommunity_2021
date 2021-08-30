@@ -32,9 +32,9 @@ public class UsrMemberController extends Controller{
 		}
 		
 		String loginPw = req.getParameter("loginPwReal");
-		
-		if(Util.isEmpty(loginPw)) {
-			return msgAndBack(req, "loginPw를 입력해주세요.");
+
+		if (Util.isEmpty(loginPw)) {
+			return msgAndBack(req, "로그인비번을 입력해주세요.");
 		}
 		
 		String name = req.getParameter("name");

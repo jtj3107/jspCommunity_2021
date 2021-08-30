@@ -26,5 +26,8 @@ public class Article {
 	private String extra__writer;
 	private String extra__boardName;
 	private String extra__boardCode;
+	private int extra__likePoint;
+	private int extra__likeOnlyPoint;
+	private int extra__dislikeOnlyPoint;
 
 }
