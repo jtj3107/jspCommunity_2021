@@ -1,15 +1,12 @@
 package com.jtj.example.jspCommunity.servlet;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,11 +57,11 @@ public abstract class DispatcherServlet extends HttpServlet {
 		String[] requestUriBits = requestUri.split("/");
 
 		int minBitCount = 5;
-		
-		if(App.isProductMode()) {
+
+		if (App.isProductMode()) {
 			minBitCount = 4;
 		}
-		
+
 		if (requestUriBits.length < minBitCount) {
 			resp.getWriter().append("올바른 요청이 아닙니다.");
 			return null;
@@ -76,17 +73,17 @@ public abstract class DispatcherServlet extends HttpServlet {
 			MysqlUtil.setDBInfo("127.0.0.1", "geotjeoli", "gjl123414", "jspCommunity");
 			MysqlUtil.setDevMode(true);
 		}
-		
+
 		int controllerTypeNameIndex = 2;
 		int controllerNameIndex = 3;
 		int actionMethodNameIndex = 4;
-		
-		if(App.isProductMode()) {
+
+		if (App.isProductMode()) {
 			controllerTypeNameIndex = 1;
 			controllerNameIndex = 2;
 			actionMethodNameIndex = 3;
 		}
-		
+
 		String controllerTypeName = requestUriBits[controllerTypeNameIndex];
 		String controllerName = requestUriBits[controllerNameIndex];
 		String actionMethodName = requestUriBits[actionMethodNameIndex];
@@ -120,6 +117,12 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 		req.setAttribute("currentUrl", currentUrl);
 		req.setAttribute("encodedCurrentUrl", encodedCurrentUrl);
+
+		Map<String, Object> param = Util.getParamMap(req);
+		String paramJson = Util.getJsonText(param);
+
+		req.setAttribute("paramMap", param);
+		req.setAttribute("paramJson", paramJson);
 
 		// 데이터 추가 인터셉터 끝
 
