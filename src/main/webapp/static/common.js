@@ -191,11 +191,28 @@ function ToastEditor__init() {
     const $initialValueEl = $node.find(' > script');
     const initialValue = $initialValueEl.length == 0 ? '' : $initialValueEl.html().trim();
 
+	let height = '600px';
+
+	if($(node).attr('data-height')) {
+		height = $(node).attr('data-height');	
+	}
+	
+	let previewStyle = 'vertical';
+	
+	if($(node).attr('data-previewStyle')) {
+		previewStyle = $(node).attr('data-previewStyle');
+	}
+	else {
+		if($(window).width() < 600) {
+			previewStyle = 'tab';
+		}
+	}
+
     const editor = new toastui.Editor({
       el: node,
-      previewStyle: 'vertical',
+      previewStyle: previewStyle,
       initialValue: initialValue,
-      height:'600px',
+      height:height,
       plugins: [
         [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
         [toastui.Editor.plugin.codeSyntaxHighlight, {highlighter:Prism}],

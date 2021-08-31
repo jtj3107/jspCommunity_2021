@@ -158,4 +158,13 @@ public class ArticleDao {
 
 		return MysqlUtil.selectRowIntValue(sql);
 	}
+
+	public Article getArticleById(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT A.*");
+		sql.append("FROM article AS A");
+		sql.append("WHERE A.id = ?", id);
+
+		return MysqlUtil.selectRow(sql, Article.class);
+	}
 }
