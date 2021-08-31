@@ -76,8 +76,8 @@
 					<td>
 						<div>
 							<div>
-								<script type="text/x-template">${article.body}</script>
-								<div class="toast-ui-editor"></div>
+								<script type="text/x-template"></script>
+								<div class="toast-ui-editor">${article.body}</div>
 							</div>
 						</div>
 					</td>
