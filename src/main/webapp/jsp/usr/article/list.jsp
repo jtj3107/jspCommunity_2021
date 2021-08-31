@@ -57,11 +57,12 @@
 							</select>
 						</div>
 						<script>
-						const param__searchKeywordType = '${param.searchKeywordType}';
-						
-						if ( param__searchKeywordType ) {
-							$('select[name="searchKeywordType"]').val(param__searchKeywordType);
-						}
+							const param__searchKeywordType = '${param.searchKeywordType}';
+
+							if (param__searchKeywordType) {
+								$('select[name="searchKeywordType"]').val(
+										param__searchKeywordType);
+							}
 						</script>
 					</td>
 				</tr>
@@ -71,8 +72,7 @@
 					</th>
 					<td>
 						<div>
-							<input value="${param.searchKeyword}" type="text"
-								name="searchKeyword" placeholder="검색어를 입력해주세요." />
+							<input value="${param.searchKeyword}" type="text" name="searchKeyword" placeholder="검색어를 입력해주세요." />
 						</div>
 					</td>
 				</tr>
@@ -100,9 +100,7 @@
 				<i class="fas fa-clipboard-list"></i>
 			</span>
 			<span>총 게시물 수 : </span>
-			<span class="color-red">
-				${totalCount}
-			</span>	
+			<span class="color-red"> ${totalCount} </span>
 		</div>
 	</div>
 </div>
@@ -113,12 +111,14 @@
 				<col width="100">
 				<col width="200">
 				<col width="150">
+				<col width="150">
 			</colgroup>
 			<thead>
 				<tr>
 					<th>번호</th>
 					<th>날짜</th>
 					<th>작성자</th>
+					<th>좋아요</th>
 					<th>제목</th>
 				</tr>
 			</thead>
@@ -135,6 +135,20 @@
 							<span class="article-list-box__writer">${article.extra__writer}</span>
 						</td>
 						<td>
+							<span class="article-list-box__likeOnlyPoint">
+								<span>
+									<i class="far fa-thumbs-up"></i>
+								</span>
+								<span> ${article.extra__likeOnlyPoint} </span>
+							</span>
+							<span class="article-list-box__dislikeOnlyPoint">
+								<span>
+									<i class="far fa-thumbs-down"></i>
+								</span>
+								<span> ${article.extra__dislikeOnlyPoint} </span>
+							</span>
+						</td>
+						<td>
 							<a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}"
 								class="article-list-box__title article-list-box__title--pc hover-link">${article.title}</a>
 						</td>
@@ -147,11 +161,24 @@
 							</div>
 
 							<div class="flex">
-								<span
-									class="article-list-box__writer article-list-box__writer--mobile">${article.extra__writer}</span>
+								<span class="article-list-box__likeOnlyPoint">
+									<span>
+										<i class="far fa-thumbs-up"></i>
+									</span>
+									<span> ${article.extra__likeOnlyPoint} </span>
+								</span>
+								<span class="article-list-box__dislikeOnlyPoint">
+									<span>
+										<i class="far fa-thumbs-down"></i>
+									</span>
+									<span> ${article.extra__dislikeOnlyPoint} </span>
+								</span>
+							</div>
+
+							<div class="flex">
+								<span class="article-list-box__writer article-list-box__writer--mobile">${article.extra__writer}</span>
 								<span>|</span>
-								<span
-									class="article-list-box__reg-date article-list-box__reg-date--mobile">${article.regDate}</span>
+								<span class="article-list-box__reg-date article-list-box__reg-date--mobile">${article.regDate}</span>
 							</div>
 						</td>
 					</tr>
@@ -174,13 +201,11 @@
 				value="?page=${pageBoxStartBeforePage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 			<a href="${aUrl}">◀</a>
 		</c:if>
-		<c:forEach var="i" begin="${pageBoxStartPage}" end="${pageBoxEndPage}"
-			step="1">
+		<c:forEach var="i" begin="${pageBoxStartPage}" end="${pageBoxEndPage}" step="1">
 			<c:set var="aClass" value="${page == i ? 'color-red' : ''}" />
 			<c:set var="aUrl"
 				value="?page=${i}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
-			<a class="${aClass} article-list-page-box__page-btn--no"
-				href="${aUrl}">${i}</a>
+			<a class="${aClass} article-list-page-box__page-btn--no" href="${aUrl}">${i}</a>
 		</c:forEach>
 
 		<c:if test="${pageBoxEndAfterBtnNeedToShow}">
