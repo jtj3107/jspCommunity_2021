@@ -6,9 +6,9 @@ import java.util.Map;
 
 import com.jtj.example.jspCommunity.App;
 import com.jtj.example.jspCommunity.container.Container;
+import com.jtj.example.jspCommunity.dao.MemberDao;
 import com.jtj.example.jspCommunity.dto.Member;
 import com.jtj.example.jspCommunity.dto.ResultData;
-import com.sbs.example.jspCommunity.dao.MemberDao;
 import com.sbs.example.util.Util;
 
 public class MemberService {

@@ -7,7 +7,7 @@ import com.jtj.example.jspCommunity.dto.Article;
 import com.jtj.example.jspCommunity.dto.Board;
 import com.jtj.example.jspCommunity.dto.Member;
 import com.jtj.example.jspCommunity.container.Container;
-import com.sbs.example.jspCommunity.dao.ArticleDao;
+import com.jtj.example.jspCommunity.dao.ArticleDao;
 
 
 public class ArticleService {
